@@ -1,5 +1,6 @@
 import productList from "../../../data/productList.json";
 import Button from "../../common/Button";
+import ProductDescription from "./ProductDescription";
 
 const Home = () => {
   return (
@@ -18,7 +19,10 @@ const Home = () => {
             <h2 className="text-xl font-semibold text-teal-950">
               {product.name}
             </h2>
-            <p className="text-teal-900">{product.description}</p>
+            <div className="min-h-20">
+              <ProductDescription description={product.description} />
+            </div>
+
             <div className="mt-4 text-lg font-bold text-red-950">
               ${product.price}
             </div>
