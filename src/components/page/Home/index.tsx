@@ -4,10 +4,10 @@ import Button from "../../common/Button";
 const Home = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
-      {productList.products.map((product, index) => (
+      {productList.products.map((product) => (
         <div
           key={product.id}
-          className="card bg-slate-200 rounded-lg shadow-lg overflow-hidden"
+          className="card bg-slate-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-slate-300 transition-all duration-300"
         >
           <img
             src={product.image}
