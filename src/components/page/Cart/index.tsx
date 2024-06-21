@@ -2,11 +2,12 @@ import productList from "../../../data/productList.json";
 import { useDispatch, useSelector } from "react-redux";
 import cartSlice from "../../../data/cartSlice";
 import EmptyCart from "../../../assets/EmptyCart.jpg";
+import Button from "../../common/Button";
 
 export default function Cart() {
   const { cartProductIds } = useSelector((state: any) => state.cart);
   const dispatch = useDispatch();
-  const { removeFromCart } = cartSlice.actions;
+  const { removeFromCart, clearAllItems } = cartSlice.actions;
 
   const cartProducts = productList.products.filter((product) =>
     cartProductIds.includes(product.id)
@@ -14,7 +15,17 @@ export default function Cart() {
 
   return (
     <div className="row gap-4 p-5">
-      <p className="text-3xl">Products in cart...</p>
+      <div className="grid grid-cols-2 ml-5 mr-5">
+        <p className="text-3xl">Products in cart...</p>
+        <div className="flex justify-end">
+        {cartProducts.length > 0 && (<Button
+          style="w-1/2 px-4 py-2 font-semibold text-white bg-blue-500 hover:bg-blue-700 rounded"
+          children="Checkout"
+          onClick={() => dispatch(clearAllItems())}
+        />)}
+        </div>
+      </div>
+
       {cartProducts.map((product) => (
         <div
           key={product.id}
@@ -52,12 +63,12 @@ export default function Cart() {
       {cartProducts.length == 0 && (
         <div className="h-screen flex justify-center">
           <div className="bg-slate-50 shadow-lg overflow-hidden flex flex-col items-center h-96 w-1/2">
-              <p className="m-5 text-3xl">Empty cart...</p>
-              <img
-                alt="empty photo"
-                src={EmptyCart}
-                className=" w-1/2 h-60 object-cover"
-              />
+            <p className="m-5 text-3xl">Empty cart...</p>
+            <img
+              alt="empty photo"
+              src={EmptyCart}
+              className=" w-1/2 h-60 object-cover"
+            />
           </div>
         </div>
       )}
